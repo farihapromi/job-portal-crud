@@ -1,10 +1,14 @@
+import Lottie from 'lottie-react'
 import React from 'react'
+import { Link } from 'react-router-dom'
+import registerAnimationData from '../../assets/lottie/register.json'
 
 const Signup = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
+        <Lottie animationData={registerAnimationData }></Lottie>
      
     </div>
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -30,6 +34,10 @@ const Signup = () => {
           <button className="btn btn-primary">SignUp</button>
         </div>
       </form>
+       <p className="mb-4 ml-4">
+        Already  have an account?
+        <Link className='p-2 m-2 bg-blue-500 rounded-lg' to='/login'>Login</Link>
+      </p>
     </div>
   </div>
 </div>
