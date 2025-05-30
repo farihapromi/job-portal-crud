@@ -1,8 +1,24 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import AuthContext from '../../Context/AuthContext/AuthContext'
+import jobIcon from '../../assets/job_logo.png'
 
 const Navbar = () => {
+  const {user,  signOutUser}=useContext(AuthContext)
+  const handleSignOut=()=>{
+    signOutUser()
+    .then(()=>{
+      console.log("Signout sucessfully")
+    })
+    .catch(error=>{
+      console.log("error in signout",error)
+    })
+
+  }
     const links=<>
+  <li><NavLink to='/'>Home</NavLink></li>
+    <li><NavLink to='/'></NavLink></li>
+      <li><NavLink to='/'></NavLink></li>
     </>
   return (
    <div className="navbar bg-base-100">
@@ -28,7 +44,9 @@ const Navbar = () => {
         {links}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="btn btn-ghost text-xl">
+      <img src={jobIcon} className='w-10' alt="" />
+      Job Portal</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -36,8 +54,17 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end pl-4 m-2">
-    <Link to='/sign-up' className='btn p-2 gap-2 rounded-lg'>Sign Up</Link>
+    {
+      user ?<><button className='btn p-2 gap-2 rounded-lg'
+      onClick={handleSignOut}
+      >Log out
+      </button></>:
+      <>
+       <Link to='/sign-up' className='btn p-2 gap-2 rounded-lg'>Sign Up</Link>
       <Link to='/login' className='btn p-2 rounded-lg'>Login</Link>
+      </>
+    }
+   
    
   </div>
 </div>
