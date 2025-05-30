@@ -27,6 +27,7 @@ const Banner = () => {
         <motion.span
         animate={{color:['#ecff33','#33ffce']}}
         transition={{duration:1.5,repeat:Infinity}}
+        className='p-2'
         > Jobs</motion.span> for you!</motion.h1>
       <p className="py-6">
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
