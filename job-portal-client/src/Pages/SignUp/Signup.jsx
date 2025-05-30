@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import registerAnimationData from '../../assets/lottie/register.json'
 import AuthContext from '../../Context/AuthContext/AuthContext'
+import SocialLogin from '../Shared/SocialLogin'
 
 const Signup = () => {
   const {createUser}=useContext(AuthContext)
@@ -51,10 +52,14 @@ const Signup = () => {
           <button className="btn btn-primary">SignUp</button>
         </div>
       </form>
+    
        <p className="mb-4 ml-4">
         Already  have an account?
         <Link className='p-2 m-2 bg-blue-500 rounded-lg' to='/login'>Login</Link>
       </p>
+     
+          <SocialLogin/>
+    
     </div>
   </div>
 </div>

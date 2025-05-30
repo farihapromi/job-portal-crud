@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import registerAnimationData from '../../assets/lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext'
+import SocialLogin from '../Shared/SocialLogin'
 
 const Login = () => {
 
@@ -56,6 +57,7 @@ const Login = () => {
        Don't have account?
         <Link className='p-2 m-2 bg-blue-500 rounded-lg' to='/sign-up'>Sign Up</Link>
       </p>
+      <SocialLogin/>
     </div>
   </div>
 </div>
