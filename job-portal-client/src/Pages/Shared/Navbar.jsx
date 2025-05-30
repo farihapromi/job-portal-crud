@@ -35,9 +35,10 @@ const Navbar = () => {
       {links}
     </ul>
   </div>
-  <div className="navbar-end">
-    <Link to='/sign-up'>Sign Up</Link>
-    <a className="btn">Sign In</a>
+  <div className="navbar-end pl-4 m-2">
+    <Link to='/sign-up' className='btn p-2 gap-2 rounded-lg'>Sign Up</Link>
+      <Link to='/login' className='btn p-2 rounded-lg'>Login</Link>
+   
   </div>
 </div>
   )
