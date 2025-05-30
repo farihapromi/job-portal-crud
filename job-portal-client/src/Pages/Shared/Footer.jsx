@@ -87,7 +87,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t py-4 mt-6 text-center text-gray-500 text-xs flex flex-col md:flex-row justify-between max-w-7xl mx-auto px-4">
-        <div>Copyright © 2025. JobBox all rights reserved</div>
+        <div>Copyright © 2025. JobPortal all rights reserved</div>
         <div className="space-x-4 mt-2 md:mt-0">
           <span>Privacy Policy</span>
           <span>Terms & Conditions</span>
