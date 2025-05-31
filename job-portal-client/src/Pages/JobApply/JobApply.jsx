@@ -2,73 +2,72 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 const JobApply = () => {
-    const {id}=useParams()
-    const submitJobApply=e=>{
-        e.preventDefault()
-        const form=e.target
-       
+  const { id } = useParams()
 
-  const linkedin = form.linkedin.value;
-  const github = form.github.value;
-  const resumeFile = form.resume; 
+  const submitJobApply = (e) => {
+    e.preventDefault()
+    const form = e.target
+    const linkedin = form.linkedin.value
+    const github = form.github.value
+    const resume = form.resume.value
+
+    console.log({ linkedin, github, resume, jobId: id })
+  }
+
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Apply Now!</h1>
-          <p className="py-6">
-            Fill out your details to apply for this position. Make sure all fields are accurate.
-          </p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
-            
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-blue-50 p-4">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">
+          Apply for the Job
+        </h1>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">LinkedIn</span>
-              </label>
-              <input
-                type="url"
-                name="linkedin"
-                placeholder="LinkedIn Profile URL"
-                className="input input-bordered"
-                required
-              />
-            </div>
+        <form onSubmit={submitJobApply} className="space-y-5">
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">
+              LinkedIn Profile
+            </label>
+            <input
+              type="url"
+              name="linkedin"
+              placeholder="https://linkedin.com/in/yourname"
+              className="input input-bordered w-full"
+              required
+            />
+          </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">GitHub Link</span>
-              </label>
-              <input
-                type="url"
-                name="github"
-                placeholder="GitHub Profile URL"
-                className="input input-bordered"
-                required
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">
+              GitHub Profile
+            </label>
+            <input
+              type="url"
+              name="github"
+              placeholder="https://github.com/yourname"
+              className="input input-bordered w-full"
+              required
+            />
+          </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Resume </span>
-              </label>
-              <input
-                type="url"
-                name="resume"
-                placeholder='Resume Url'
-               
-                className="file-input file-input-bordered"
-                required
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">
+              Resume URL
+            </label>
+            <input
+              type="url"
+              name="resume"
+              placeholder="https://your-resume-link.com"
+              className="input input-bordered w-full"
+              required
+            />
+          </div>
 
-            <div className="form-control mt-6">
-              <button className="btn btn-primary" type="submit">Apply</button>
-            </div>
-          </form>
-        </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-full mt-4 text-white"
+          >
+            Submit Application
+          </button>
+        </form>
       </div>
     </div>
   )
