@@ -1,12 +1,13 @@
 import Lottie from 'lottie-react'
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import registerAnimationData from '../../assets/lottie/register.json'
 import AuthContext from '../../Context/AuthContext/AuthContext'
 import SocialLogin from '../Shared/SocialLogin'
 
 const Signup = () => {
   const {createUser}=useContext(AuthContext)
+  const navigate=useNavigate()
   const handleSignup=e=>{
     e.preventDefault();
     const form=e.target;
@@ -16,6 +17,7 @@ const Signup = () => {
     createUser(email,password)
     .then(result=>{
       console.log(result.user)
+      navigate('/')
     })
     .catch(error=>{
       console.log(error)
