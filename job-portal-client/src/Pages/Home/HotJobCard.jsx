@@ -1,8 +1,9 @@
 import React from 'react'
 import { LiaMapMarkerAltSolid } from "react-icons/lia";
+import { Link } from 'react-router-dom';
 
 const HotJobCard = ({job}) => {
-  const { title, location, jobType, category, applicationDeadline, salaryRange, description, company, requirements, responsibilities, status, hr_email, hr_name, company_logo } = job;
+  const { _id,title, location, jobType, category, applicationDeadline, salaryRange, description, company, requirements, responsibilities, status, hr_email, hr_name, company_logo } = job;
 
   return (
     <div className="card card-compact bg-base-100  shadow-xl">
@@ -29,7 +30,9 @@ const HotJobCard = ({job}) => {
     </div>
     <div className="card-actions justify-end items-center mt-4">
         <p>Salary :{salaryRange.min}-{salaryRange.max} {salaryRange.currency}</p>
+    <Link to={`jobs/${_id}`}>
       <button className="btn bg-gray-300 text-blue-500 hover:bg-blue-600 hover:text-white rounded-lg">Apply</button>
+      </Link>
     </div>
   </div>
 </div>
