@@ -70,6 +70,14 @@ async function run() {
       res.send(result);
     });
 
+    //get id by job for recruiter.for a particular job how many application has come
+    app.get('/job-applications/jobs/:job_id', async (req, res) => {
+      const jobId = req.params.job_id;
+      const query = { job_id: jobId };
+      const result = await jobApplicationCollection.find(query).toArray();
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
     console.log(
