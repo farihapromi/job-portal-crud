@@ -45,9 +45,17 @@ async function run() {
     });
 
     // Job Applicaitons API
-    app.post('/job_applications', async (req, res) => {
+    app.post('/job-applications', async (req, res) => {
       const application = req.body;
       const result = await jobApplicationCollection.insertOne(application);
+      res.send(result);
+    });
+
+    //get all data ,get one data
+    app.get('/job-application', async (req, res) => {
+      const email = req.query.email;
+      const query = { applicant_email: email };
+      const result = await jobApplicationCollection.find(query).toArray();
       res.send(result);
     });
 
