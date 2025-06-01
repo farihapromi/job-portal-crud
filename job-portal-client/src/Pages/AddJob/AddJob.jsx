@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
 
+
 const AddJob = () => {
+    const navigate=useNavigate()
+ 
   const [job, setJob] = useState({
     title: '',
     location: '',
@@ -52,10 +56,11 @@ const AddJob = () => {
                   Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Your work has been saved",
+        title: "Your Job has been added",
         showConfirmButton: false,
         timer: 1500
       });
+      navigate('/myPostedJob')
         
               }
      })
@@ -85,9 +90,9 @@ const AddJob = () => {
           
           <input name="applicationDeadline" type="date" value={job.applicationDeadline} onChange={handleChange} className="input input-bordered" placeholder="Deadline" required />
           
-          <input name="min" value={job.salaryMin} onChange={handleChange} className="input input-bordered" placeholder="Min Salary" type="number" required />
+          <input name="min" value={job.min} onChange={handleChange} className="input input-bordered" placeholder="Min Salary" type="number" required />
           
-          <input name="max" value={job.salaryMax} onChange={handleChange} className="input input-bordered" placeholder="Max Salary" type="number" required />
+          <input name="max" value={job.max} onChange={handleChange} className="input input-bordered" placeholder="Max Salary" type="number" required />
           
           <select name="currency" value={job.currency} onChange={handleChange} className="select select-bordered" required>
             <option value="bdt">BDT</option>
@@ -104,7 +109,7 @@ const AddJob = () => {
           <input name="responsibilities" value={job.responsibilities} onChange={handleChange} className="input input-bordered col-span-2" placeholder="Responsibilities (comma separated)" required />
           
           <input name="hr_name" value={job.hr_name} onChange={handleChange} className="input input-bordered" placeholder="HR Name" required />
-          <input name="hr_email" type="email" value={job.hr_email} onChange={handleChange} className="input input-bordered" placeholder="HR Email" required />
+          <input name="hr_email" type="email" value={job.hr_email}  onChange={handleChange} className="input input-bordered" placeholder="HR Email" required />
           
           <input name="company_logo" value={job.company_logo} onChange={handleChange} className="input input-bordered col-span-2" placeholder="Company Logo URL" />
 
