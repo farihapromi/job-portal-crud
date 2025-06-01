@@ -35,6 +35,20 @@ const AddJob = () => {
     newJob.requirements=newJob.requirements.split(',')
     newJob.responsibilities=newJob.responsibilities.split(',')
      console.log(newJob)
+     //sebd data to backend
+     fetch('http://localhost:5000/jobs',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(newJob)
+
+     })
+     .then (res=>res.json())
+     .then(data=>{
+        console.log(data)
+     })
+     .catch(error=>console.log(error))
     
   };
 
