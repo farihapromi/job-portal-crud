@@ -25,6 +25,14 @@ const AddJob = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //fomData diye form er sob data 
+    const formData=new FormData(e.target)
+    const initialData=Object.fromEntries(formData.entries())
+    //console.log(initialData)
+    const {min,max,currency,...newJob}=initialData
+    console.log(newJob)
+    newJob.salaryRange={min,max,currency}
+     console.log(newJob)
     
   };
 
@@ -50,9 +58,9 @@ const AddJob = () => {
           
           <input name="applicationDeadline" type="date" value={job.applicationDeadline} onChange={handleChange} className="input input-bordered" placeholder="Deadline" required />
           
-          <input name="salaryMin" value={job.salaryMin} onChange={handleChange} className="input input-bordered" placeholder="Min Salary" type="number" required />
+          <input name="min" value={job.salaryMin} onChange={handleChange} className="input input-bordered" placeholder="Min Salary" type="number" required />
           
-          <input name="salaryMax" value={job.salaryMax} onChange={handleChange} className="input input-bordered" placeholder="Max Salary" type="number" required />
+          <input name="max" value={job.salaryMax} onChange={handleChange} className="input input-bordered" placeholder="Max Salary" type="number" required />
           
           <select name="currency" value={job.currency} onChange={handleChange} className="select select-bordered" required>
             <option value="bdt">BDT</option>
