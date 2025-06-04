@@ -29,8 +29,13 @@ async function run() {
     //auth related api,jwt
     app.post('/jwt', async (req, res) => {
       const user = req.body;
-      const token = jwt.sign(user, 'secret', { expiresIn: '1h' });
-      res.send(token);
+      const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res
+        .cookie('token', token, {
+          httpOnly: true,
+          secure: false,
+        })
+        .send({ sucess: true });
     });
 
     //job related API
