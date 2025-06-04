@@ -25,10 +25,11 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(401).send({ message: 'Unauthorized access' });
   }
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decode) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(401).send({ message: 'Authorized access' });
+      return res.status(401).send({ message: 'UnAuthorized access' });
     }
+    req.user = decoded;
     next();
   });
 };
@@ -104,8 +105,11 @@ async function run() {
     //get all data ,get one data
     const { ObjectId } = require('mongodb');
 
-    app.get('/job-application', async (req, res) => {
+    app.get('/job-application', verifyToken, async (req, res) => {
       const email = req.query.email;
+      if (req.user.email !== req.query.email) {
+        return res.status(403).send({ message: 'Forbidden access' });
+      }
       console.log('cookies', req.cookies);
 
       const result = await jobApplicationCollection
