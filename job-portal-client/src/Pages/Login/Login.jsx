@@ -20,13 +20,13 @@ const Login = () => {
     console.log(email,password)
    signInUser(email,password)
     .then(result=>{
-      console.log(result.user)
+      console.log(result.user.email)
       const user={email:email}
-      axios.post('http://localhost:5000/jwt',user)
+      axios.post('http://localhost:5000/jwt',user,{withCredentials:true})
       .then(res=>{
         console.log(res.data)
       })
-      //navigate(from)
+      navigate(from)
     })
     .catch(error=>{
       console.log(error.message)

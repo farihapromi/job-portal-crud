@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const MyApplication = () => {
   const { user } = useAuth();
@@ -7,12 +8,17 @@ const MyApplication = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/job-application?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-          setJobs(data);
-        })
-        .catch(error => console.log(error));
+     
+      axios.get(`http://localhost:5000/job-application?email=${user.email}`, 
+        { withCredentials: true })
+  .then(res => {
+    setJobs(res.data);
+console.log(res.data); // to verify data
+
+  })
+  .catch(error => console.error(error));
+
+  
     }
   }, [user?.email]);
 
@@ -30,40 +36,41 @@ const MyApplication = () => {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            {jobs.map((job) => (
-              <tr key={job._id}>
-                <th>
-                  <input type="checkbox" className="checkbox" />
-                </th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={job.company_logo}
-                          alt="User Avatar"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{job.title}</div>
-                      <div className="text-sm opacity-50">{job.location}</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  {job.jobTitle || "Untitled"}
-                  <br />
-                  <span className="badge badge-ghost badge-sm">{job.position || "Position"}</span>
-                </td>
-                <td>{job.status || "Pending"}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">Details</button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
+      <tbody>
+  {jobs.map((job) => (
+    <tr key={job._id}>
+      <th>
+        <input type="checkbox" className="checkbox" />
+      </th>
+      <td>
+        <div className="flex items-center gap-3">
+          <div className="avatar">
+            <div className="mask mask-squircle h-12 w-12">
+              <img
+                src={job?.jobDetails?.company_logo}
+                alt="Company Logo"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="font-bold">{job?.jobDetails?.title}</div>
+            <div className="text-sm opacity-50">{job?.jobDetails?.location}</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        {job?.jobDetails?.category || "Untitled"}
+        <br />
+        <span className="badge badge-ghost badge-sm">{job?.jobDetails?.jobType}</span>
+      </td>
+      <td>{job?.status || "Pending"}</td>
+      <th>
+        <button className="btn btn-ghost btn-xs">Details</button>
+      </th>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       </div>
     </div>
