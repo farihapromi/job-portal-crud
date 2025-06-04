@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
 require('dotenv').config();
 const app = express();
 
@@ -13,6 +15,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.u7yariw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -81,10 +84,43 @@ async function run() {
     });
 
     //get all data ,get one data
+    const { ObjectId } = require('mongodb');
+
     app.get('/job-application', async (req, res) => {
       const email = req.query.email;
-      const query = { applicant_email: email };
-      const result = await jobApplicationCollection.find(query).toArray();
+      console.log('cookies', req.cookies);
+
+      const result = await jobApplicationCollection
+        .aggregate([
+          {
+            $match: { applicant_email: email },
+          },
+          {
+            $addFields: {
+              jobObjectId: {
+                $convert: {
+                  input: '$job_id',
+                  to: 'objectId',
+                  onError: null,
+                  onNull: null,
+                },
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: 'jobs', // your jobs collection name
+              localField: 'jobObjectId',
+              foreignField: '_id',
+              as: 'jobDetails',
+            },
+          },
+          {
+            $unwind: '$jobDetails',
+          },
+        ])
+        .toArray();
+
       res.send(result);
     });
 
