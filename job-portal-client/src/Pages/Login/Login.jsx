@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import registerAnimationData from '../../assets/lottie/login.json'
 import AuthContext from '../../Context/AuthContext/AuthContext'
 import SocialLogin from '../Shared/SocialLogin'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -20,7 +21,12 @@ const Login = () => {
    signInUser(email,password)
     .then(result=>{
       console.log(result.user)
-      navigate(from)
+      const user={email:email}
+      axios.post('http://localhost:5000/jwt',user)
+      .then(data=>{
+        console.log(data)
+      })
+      //navigate(from)
     })
     .catch(error=>{
       console.log(error.message)
