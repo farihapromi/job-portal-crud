@@ -24,7 +24,9 @@ const JobApply = () => {
         resume
     }
     //post form dat
-    fetch('http://localhost:5000/job-applications',{
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+    fetch(`${API_URL}/job-applications`,{
         method:'POST',
         headers:{
             'content-type':'application/json'

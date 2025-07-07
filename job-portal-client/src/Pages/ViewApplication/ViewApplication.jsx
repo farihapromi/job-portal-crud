@@ -3,13 +3,15 @@ import { useLoaderData } from 'react-router-dom'
 
 const ViewApplication = () => {
     const applications=useLoaderData()
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
     console.log(applications)
     const handleStatusUpdate=(e,id)=>{
         console.log(e.target.value,id)
         const data={
             status:e.target.value
         }
-        fetch(`http://localhost:5000/job-applications/${id}`,{
+        fetch(`${ API_URL}/job-applications/${id}`,{
             method:'PATCH',
             headers:{
                 'content-type':'application/json'

@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom'
 const MyPosted = () => {
     const{user}=useAuth()
     const[jobs,setJobs]=useState([])
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 
     useEffect(()=>{
        
-      fetch(`http://localhost:5000/jobs?email=${user.email}`)
+      fetch(`${API_URL}/jobs?email=${user.email}`)
         .then(res => res.json())
         .then(data => {
          setJobs(data);

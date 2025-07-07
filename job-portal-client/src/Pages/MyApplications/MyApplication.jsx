@@ -6,10 +6,13 @@ import Swal from 'sweetalert2';
 const MyApplication = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+
 
   useEffect(() => {
     if (user?.email) {
-      axios.get(`http://localhost:5000/job-application?email=${user.email}`, {
+      axios.get(`${API_URL}/job-application?email=${user.email}`, {
         withCredentials: true
       })
         .then(res => {
@@ -30,7 +33,7 @@ const MyApplication = () => {
       confirmButtonText: 'Yes, withdraw it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/job-applications/${id}`, {
+        axios.delete(`${API_URL}/job-applications/${id}`, {
           withCredentials: true
         })
           .then(res => {

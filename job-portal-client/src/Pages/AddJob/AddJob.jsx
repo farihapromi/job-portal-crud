@@ -42,7 +42,9 @@ const AddJob = () => {
     newJob.responsibilities=newJob.responsibilities.split(',')
      console.log(newJob)
      //sebd data to backend
-     fetch('http://localhost:5000/jobs',{
+     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+     fetch(`${API_URL}/jobs`,{
       method:'POST',
       headers:{
         'content-type':'application/json'
