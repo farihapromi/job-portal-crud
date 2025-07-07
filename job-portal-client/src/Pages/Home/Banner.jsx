@@ -29,10 +29,9 @@ const Banner = () => {
         transition={{duration:1.5,repeat:Infinity}}
         className='p-2'
         > Jobs</motion.span> for you!</motion.h1>
-      <p className="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
+      <p className="py-6 text-gray-600">
+  Discover exciting career opportunities tailored to your skills and goals. Whether you're a seasoned professional or just starting out, explore the latest job openings and take the next step in your journey.
+</p>
       <button className="btn btn-primary">Get Started</button>
     </div>
   </div>
