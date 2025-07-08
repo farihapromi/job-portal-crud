@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(
   cors({
-    origin: ['https://job-portal-crud-pi.vercel.app/'],
+    origin: ['https://job-portal-crud-pi.vercel.app'],
     credentials: true,
   })
 );
