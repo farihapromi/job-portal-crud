@@ -11,6 +11,8 @@ const port = process.env.PORT || 5000;
 app.use(
   cors({
     origin: ['https://job-portal-crud-pi.vercel.app'],
+    // origin: ['http://localhost:5173'],
+    // changes localhost:5173 to this for prodcuotn
     credentials: true,
   })
 );
